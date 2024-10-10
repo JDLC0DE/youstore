@@ -1,4 +1,6 @@
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet, Dimensions } from "react-native";
+
+const { width } = Dimensions.get("window");
 
 export const CharacterCard = ({ character }: { character: any }) => {
   return (
@@ -26,6 +28,7 @@ export const CharacterCard = ({ character }: { character: any }) => {
 
 const styles = StyleSheet.create({
   container: {
+    width: "100%",
     backgroundColor: "#272b33",
   },
   cardContainer: {
@@ -37,11 +40,12 @@ const styles = StyleSheet.create({
   cardImage: {
     width: "100%",
     height: 320,
-    objectFit: "cover",
+    objectFit: "fill",
   },
   cardInfo: {
     padding: 10,
     gap: 10,
+    width: (width - 30) / 2,
   },
   cardTitle: {
     color: "#fff",

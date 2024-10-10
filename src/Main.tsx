@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { StyleSheet, View, ScrollView, ActivityIndicator } from "react-native";
+import { StyleSheet, View, ActivityIndicator, FlatList } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { CharacterCard } from "./components/CharacterCard";
 
@@ -13,6 +13,14 @@ export default function Main() {
       .then((data) => setCharacters(data.results));
   }, []);
 
+  /**
+   * <ScrollView style={{ paddingHorizontal: 30 }}>
+          {characters.map((character) => (
+            <CharacterCard key={character.id} character={character} />
+          ))}
+        </ScrollView>
+   */
+
   return (
     <View
       style={{
@@ -24,11 +32,18 @@ export default function Main() {
       }}
     >
       {characters.length > 0 ? (
-        <ScrollView style={{ paddingHorizontal: 30 }}>
-          {characters.map((character) => (
-            <CharacterCard key={character.id} character={character} />
-          ))}
-        </ScrollView>
+        <FlatList
+          data={characters}
+          style={{ paddingHorizontal: 10 }}
+          columnWrapperStyle={{
+            justifyContent: "space-between",
+          }}
+          contentContainerStyle={{ gap: 10 }}
+          numColumns={2}
+          keyExtractor={(character) => character.id}
+          renderItem={({ item }) => <CharacterCard character={item} />}
+          indicatorStyle="white"
+        />
       ) : (
         <ActivityIndicator size="large" />
       )}
