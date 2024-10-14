@@ -1,6 +1,12 @@
-import { View, Text, Image, StyleSheet, Dimensions } from "react-native";
+import { FC, useEffect, useRef } from "react";
+import { View, Text, Image, StyleSheet, Animated } from "react-native";
 
-const { width } = Dimensions.get("window");
+// const { width } = Dimensions.get("window");
+
+interface AnimatedCharacterCardProps {
+  character: any;
+  index: number;
+}
 
 export const CharacterCard = ({ character }: { character: any }) => {
   return (
@@ -26,9 +32,30 @@ export const CharacterCard = ({ character }: { character: any }) => {
   );
 };
 
+export const AnimatedCharacterCard: FC<AnimatedCharacterCardProps> = ({
+  character,
+  index,
+}) => {
+  const opacity = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    Animated.timing(opacity, {
+      toValue: 1,
+      duration: 500,
+      delay: index * 500,
+      useNativeDriver: true,
+    }).start();
+  }, [opacity, index]);
+
+  return (
+    <Animated.View style={{ opacity }}>
+      <CharacterCard character={character} />
+    </Animated.View>
+  );
+};
+
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
     backgroundColor: "#272b33",
   },
   cardContainer: {
@@ -39,13 +66,13 @@ const styles = StyleSheet.create({
   },
   cardImage: {
     width: "100%",
-    height: 320,
-    objectFit: "fill",
+    height: 280,
+    objectFit: "cover",
   },
   cardInfo: {
     padding: 10,
     gap: 10,
-    width: (width - 30) / 2,
+    width: "100%",
   },
   cardTitle: {
     color: "#fff",

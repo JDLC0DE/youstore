@@ -1,7 +1,14 @@
 import { useEffect, useState } from "react";
-import { StyleSheet, View, ActivityIndicator, FlatList } from "react-native";
+import {
+  StyleSheet,
+  View,
+  ActivityIndicator,
+  FlatList,
+  Text,
+} from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { CharacterCard } from "./components/CharacterCard";
+import { AnimatedCharacterCard } from "./components/CharacterCard";
+import { Logo } from "./components/Logo";
 
 export default function Main() {
   const [characters, setCharacters] = useState<any[]>([]);
@@ -13,14 +20,6 @@ export default function Main() {
       .then((data) => setCharacters(data.results));
   }, []);
 
-  /**
-   * <ScrollView style={{ paddingHorizontal: 30 }}>
-          {characters.map((character) => (
-            <CharacterCard key={character.id} character={character} />
-          ))}
-        </ScrollView>
-   */
-
   return (
     <View
       style={{
@@ -31,17 +30,29 @@ export default function Main() {
         alignItems: characters.length === 0 ? "center" : undefined,
       }}
     >
+      <View
+        style={{
+          height: 60,
+          alignItems: "center",
+          gap: 5,
+          flexDirection: "row",
+          paddingHorizontal: 10,
+        }}
+      >
+        <Logo />
+        <Text style={{ color: "#ffffff", fontSize: 25, fontWeight: 900 }}>
+          Rick and Morty
+        </Text>
+      </View>
       {characters.length > 0 ? (
         <FlatList
           data={characters}
           style={{ paddingHorizontal: 10 }}
-          columnWrapperStyle={{
-            justifyContent: "space-between",
-          }}
           contentContainerStyle={{ gap: 10 }}
-          numColumns={2}
           keyExtractor={(character) => character.id}
-          renderItem={({ item }) => <CharacterCard character={item} />}
+          renderItem={({ item, index }) => (
+            <AnimatedCharacterCard index={index} character={item} />
+          )}
           indicatorStyle="white"
         />
       ) : (
