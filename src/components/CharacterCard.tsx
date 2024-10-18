@@ -3,21 +3,21 @@ import { View, Text, Image, StyleSheet, Animated } from "react-native";
 
 // const { width } = Dimensions.get("window");
 
-interface AnimatedCharacterCardProps {
-  character: any;
-  index: number;
+interface CharacterCardProps {
+  img: string;
+  name: string;
 }
 
-export const CharacterCard = ({ character }: { character: any }) => {
+type AnimatedCharacterCardProps = CharacterCardProps & { index: number };
+
+export const CharacterCard = ({ img, name }: CharacterCardProps) => {
   return (
     <View style={styles.cardContainer}>
-      <Image source={{ uri: character.image }} style={styles.cardImage} />
+      <Image source={{ uri: img }} style={styles.cardImage} />
       <View style={styles.cardInfo}>
         <View style={{ gap: 5 }}>
-          <Text style={styles.cardTitle}>{character.name}</Text>
-          <Text style={styles.cardStatus}>
-            {character.status} - {character.species}
-          </Text>
+          <Text style={styles.cardTitle}>{name}</Text>
+          <Text style={styles.cardStatus}>1 - 2</Text>
         </View>
         <View style={{ gap: 5 }}>
           <Text style={styles.locationTitle}>Last known location:</Text>
@@ -33,8 +33,8 @@ export const CharacterCard = ({ character }: { character: any }) => {
 };
 
 export const AnimatedCharacterCard: FC<AnimatedCharacterCardProps> = ({
-  character,
   index,
+  ...props
 }) => {
   const opacity = useRef(new Animated.Value(0)).current;
 
@@ -49,7 +49,7 @@ export const AnimatedCharacterCard: FC<AnimatedCharacterCardProps> = ({
 
   return (
     <Animated.View style={{ opacity }}>
-      <CharacterCard character={character} />
+      <CharacterCard {...props} />
     </Animated.View>
   );
 };

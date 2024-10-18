@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import {
   StyleSheet,
   View,
@@ -9,16 +8,12 @@ import {
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { AnimatedCharacterCard } from "./components/CharacterCard";
 import { Logo } from "./components/Logo";
+import { useCategoriesQuery } from "root/integration/generated/hooks/categories";
 
 export default function Main() {
-  const [characters, setCharacters] = useState<any[]>([]);
   const insets = useSafeAreaInsets();
-
-  useEffect(() => {
-    fetch("https://rickandmortyapi.com/api/character")
-      .then((response) => response.json())
-      .then((data) => setCharacters(data.results));
-  }, []);
+  const { data, loading, error } = useCategoriesQuery();
+  const categories = data?.categories ?? [];
 
   return (
     <View
@@ -26,8 +21,8 @@ export default function Main() {
         ...styles.container,
         paddingTop: insets.top,
         paddingBottom: insets.bottom,
-        justifyContent: characters.length === 0 ? "center" : undefined,
-        alignItems: characters.length === 0 ? "center" : undefined,
+        justifyContent: categories.length === 0 ? "center" : undefined,
+        alignItems: categories.length === 0 ? "center" : undefined,
       }}
     >
       <View
@@ -44,14 +39,18 @@ export default function Main() {
           Rick and Morty
         </Text>
       </View>
-      {characters.length > 0 ? (
+      {categories.length > 0 ? (
         <FlatList
-          data={characters}
+          data={categories}
           style={{ paddingHorizontal: 10 }}
           contentContainerStyle={{ gap: 10 }}
           keyExtractor={(character) => character.id}
           renderItem={({ item, index }) => (
-            <AnimatedCharacterCard index={index} character={item} />
+            <AnimatedCharacterCard
+              index={index}
+              img={item.image}
+              name={item.name}
+            />
           )}
           indicatorStyle="white"
         />
