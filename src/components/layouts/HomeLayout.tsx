@@ -6,10 +6,12 @@ import {
   Text,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { AnimatedCharacterCard } from "./components/CharacterCard";
-import { useCategoriesQuery } from "root/integration/generated/hooks/categories";
 
-export default function Main() {
+import { useCategoriesQuery } from "root/integration/generated/hooks/categories";
+import { AnimatedCharacterCard } from "../CharacterCard";
+import { Header } from "../contents/Header";
+
+export default function HomeLayout() {
   const insets = useSafeAreaInsets();
   const { data, loading, error } = useCategoriesQuery();
   const categories = data?.categories ?? [];
@@ -24,19 +26,7 @@ export default function Main() {
         alignItems: categories.length === 0 ? "center" : undefined,
       }}
     >
-      <View
-        style={{
-          height: 60,
-          alignItems: "center",
-          gap: 5,
-          flexDirection: "row",
-          paddingHorizontal: 10,
-        }}
-      >
-        <Text style={{ color: "#ffffff", fontSize: 25, fontWeight: 900 }}>
-          YouStore
-        </Text>
-      </View>
+      <Header />
       {categories.length > 0 ? (
         <FlatList
           data={categories}
