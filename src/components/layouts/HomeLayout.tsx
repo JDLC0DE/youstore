@@ -2,7 +2,7 @@ import { StyleSheet, View, ActivityIndicator, FlatList } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { useCategoriesQuery } from "root/integration/generated/hooks/categories";
-import { AnimatedCharacterCard } from "../CharacterCard";
+import { AnimatedCharacterCard } from "../blocks/ProductCard";
 import { Header } from "../contents/Header";
 import { Link } from "expo-router";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
@@ -34,6 +34,7 @@ export default function HomeLayout() {
           keyExtractor={(character) => character.id}
           renderItem={({ item, index }) => (
             <AnimatedCharacterCard
+              id={item.id}
               index={index}
               img={item.image}
               name={item.name}

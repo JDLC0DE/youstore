@@ -1,34 +1,47 @@
+import { Link } from "expo-router";
 import { FC, useEffect, useRef } from "react";
-import { View, Text, Image, StyleSheet, Animated } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  Animated,
+  Pressable,
+} from "react-native";
 
 // const { width } = Dimensions.get("window");
 
 interface CharacterCardProps {
+  id: string;
   img: string;
   name: string;
 }
 
 type AnimatedCharacterCardProps = CharacterCardProps & { index: number };
 
-export const CharacterCard = ({ img, name }: CharacterCardProps) => {
+export const CharacterCard = ({ img, name, id }: CharacterCardProps) => {
   return (
-    <View style={styles.cardContainer}>
-      <Image source={{ uri: img }} style={styles.cardImage} />
-      <View style={styles.cardInfo}>
-        <View style={{ gap: 5 }}>
-          <Text style={styles.cardTitle}>{name}</Text>
-          <Text style={styles.cardStatus}>1 - 2</Text>
+    <Link asChild href={`/${id}`}>
+      <Pressable>
+        <View style={styles.cardContainer}>
+          <Image source={{ uri: img }} style={styles.cardImage} />
+          <View style={styles.cardInfo}>
+            <View style={{ gap: 5 }}>
+              <Text style={styles.cardTitle}>{name}</Text>
+              <Text style={styles.cardStatus}>1 - 2</Text>
+            </View>
+            <View style={{ gap: 5 }}>
+              <Text style={styles.locationTitle}>Last known location:</Text>
+              <Text style={styles.locationValue}>Jerryboree</Text>
+            </View>
+            <View style={{ gap: 5 }}>
+              <Text style={styles.locationTitle}>First seen in:</Text>
+              <Text style={styles.locationValue}>Mortynight Run</Text>
+            </View>
+          </View>
         </View>
-        <View style={{ gap: 5 }}>
-          <Text style={styles.locationTitle}>Last known location:</Text>
-          <Text style={styles.locationValue}>Jerryboree</Text>
-        </View>
-        <View style={{ gap: 5 }}>
-          <Text style={styles.locationTitle}>First seen in:</Text>
-          <Text style={styles.locationValue}>Mortynight Run</Text>
-        </View>
-      </View>
-    </View>
+      </Pressable>
+    </Link>
   );
 };
 

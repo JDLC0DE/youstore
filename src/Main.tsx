@@ -6,7 +6,7 @@ import {
   Text,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { AnimatedCharacterCard } from "./components/CharacterCard";
+import { AnimatedCharacterCard } from "./components/blocks/ProductCard";
 import { useCategoriesQuery } from "root/integration/generated/hooks/categories";
 
 export default function Main() {
