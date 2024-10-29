@@ -44,7 +44,7 @@ if (getRNMinorVersion() >= 75) {
   }
 }
 
-rootProject.name = 'rick-and-morty-app'
+rootProject.name = 'youstore-app'
 
 dependencyResolutionManagement {
   versionCatalogs {

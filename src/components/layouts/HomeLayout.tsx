@@ -1,15 +1,11 @@
-import {
-  StyleSheet,
-  View,
-  ActivityIndicator,
-  FlatList,
-  Text,
-} from "react-native";
+import { StyleSheet, View, ActivityIndicator, FlatList } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { useCategoriesQuery } from "root/integration/generated/hooks/categories";
 import { AnimatedCharacterCard } from "../CharacterCard";
 import { Header } from "../contents/Header";
+import { Link } from "expo-router";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
 export default function HomeLayout() {
   const insets = useSafeAreaInsets();
@@ -27,6 +23,9 @@ export default function HomeLayout() {
       }}
     >
       <Header />
+      <Link href="/category" style={{ marginVertical: 10 }}>
+        <MaterialIcons name="info" size={24} color="white" />
+      </Link>
       {categories.length > 0 ? (
         <FlatList
           data={categories}

@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "rick-and-morty-app",
-    "slug": "rick-and-morty-app",
+    "name": "youstore-app",
+    "slug": "youstore-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
