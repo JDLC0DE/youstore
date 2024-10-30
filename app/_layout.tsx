@@ -28,7 +28,7 @@ export default function Layout() {
           style={{
             ...styles.container,
             paddingTop: insets.top,
-            paddingBottom: insets.bottom,
+            // paddingBottom: insets.bottom,
           }}
         >
           <Stack

@@ -7,7 +7,7 @@ import { ProductDetailHeader } from "src/components/contents/ProductDetailHeader
 export default function ProductDetailt() {
   const { id } = useLocalSearchParams();
   return (
-    <View style={{ paddingVertical: 100, paddingHorizontal: 20 }}>
+    <View>
       <Stack.Screen
         options={{
           header: () => <ProductDetailHeader />,
