@@ -1,28 +1,23 @@
-import { StyleSheet, View, ActivityIndicator, FlatList } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { View, ActivityIndicator, FlatList } from "react-native";
 
 import { useCategoriesQuery } from "root/integration/generated/hooks/categories";
 import { AnimatedCharacterCard } from "../blocks/ProductCard";
-import { Header } from "../contents/Header";
 import { Link } from "expo-router";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
 export default function HomeLayout() {
-  const insets = useSafeAreaInsets();
   const { data, loading, error } = useCategoriesQuery();
-  const categories = data?.categories ?? [];
+  const categories = data?.categories.slice(0, 20) ?? [];
 
   return (
     <View
       style={{
-        ...styles.container,
-        paddingTop: insets.top,
-        paddingBottom: insets.bottom,
+        flex: 1,
+        backgroundColor: "#272b33",
         justifyContent: categories.length === 0 ? "center" : undefined,
         alignItems: categories.length === 0 ? "center" : undefined,
       }}
     >
-      <Header />
       <Link href="/category" style={{ marginVertical: 10 }}>
         <MaterialIcons name="info" size={24} color="white" />
       </Link>
@@ -48,10 +43,3 @@ export default function HomeLayout() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "#272b33",
-    flex: 1,
-  },
-});

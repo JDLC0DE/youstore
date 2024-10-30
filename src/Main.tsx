@@ -45,6 +45,7 @@ export default function Main() {
           keyExtractor={(character) => character.id}
           renderItem={({ item, index }) => (
             <AnimatedCharacterCard
+              id={item.id}
               index={index}
               img={item.image}
               name={item.name}
