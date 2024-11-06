@@ -1,9 +1,9 @@
-import { View, ActivityIndicator, FlatList } from "react-native";
+import { View, ActivityIndicator, FlatList, Text } from "react-native";
 
 import { useCategoriesQuery } from "root/integration/generated/hooks/categories";
 import { AnimatedCharacterCard } from "../blocks/ProductCard";
-import { Link } from "expo-router";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import ContentCarousel from "../contents/ContentCarousel";
+import Theme from "src/styles/theme";
 
 export default function HomeLayout() {
   const { data, loading, error } = useCategoriesQuery();
@@ -13,15 +13,14 @@ export default function HomeLayout() {
     <View
       style={{
         flex: 1,
-        backgroundColor: "#272b33",
-        justifyContent: categories.length === 0 ? "center" : undefined,
-        alignItems: categories.length === 0 ? "center" : undefined,
+        backgroundColor: Theme.colors.white,
+        /* justifyContent: categories.length === 0 ? "center" : undefined,
+        alignItems: categories.length === 0 ? "center" : undefined, */
       }}
     >
-      <Link href="/category" style={{ marginVertical: 10 }}>
-        <MaterialIcons name="info" size={24} color="white" />
-      </Link>
-      {categories.length > 0 ? (
+      <ContentCarousel />
+      <Text style={{ fontSize: 30, fontWeight: 900 }}>Hola</Text>
+      {/* {categories.length > 0 ? (
         <FlatList
           data={categories}
           style={{ paddingHorizontal: 10 }}
@@ -39,7 +38,7 @@ export default function HomeLayout() {
         />
       ) : (
         <ActivityIndicator size="large" />
-      )}
+      )} */}
     </View>
   );
 }

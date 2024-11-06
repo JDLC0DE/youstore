@@ -8,8 +8,8 @@ import {
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
 import { REACT_APP_API_URL } from "@env";
-import Theme from "src/styles/theme";
 import { Header } from "src/components/contents/Header";
+import Theme from "src/styles/theme";
 
 // Initialize Apollo Client
 const client = new ApolloClient({
@@ -23,7 +23,6 @@ export default function Layout() {
   return (
     <ApolloProvider client={client}>
       <SafeAreaProvider>
-        <StatusBar style="light" />
         <View
           style={{
             ...styles.container,
@@ -31,13 +30,14 @@ export default function Layout() {
             // paddingBottom: insets.bottom,
           }}
         >
+          <StatusBar style="dark" />
           <Stack
             screenOptions={{
               /* headerStyle: styles.headerContainer,
               headerTitle: "",
               headerLeft: () => (
                 <Text style={styles.headerTitle}>YouStore</Text>
-              ), */
+                ), */
               header: () => <Header />,
             }}
           />
@@ -49,18 +49,7 @@ export default function Layout() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#272b33",
     flex: 1,
-  },
-  headerContainer: {
-    alignItems: "center",
-    flexDirection: "row",
-    padding: 16,
-    backgroundColor: Theme.colors.primary,
-  },
-  headerTitle: {
-    color: Theme.colors.white,
-    fontSize: 30,
-    fontWeight: "bold",
+    backgroundColor: Theme.colors.white,
   },
 });
