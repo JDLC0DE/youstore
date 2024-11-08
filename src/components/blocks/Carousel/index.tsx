@@ -1,12 +1,40 @@
-import { View } from "react-native";
-import Carousel, { TCarouselProps } from "react-native-reanimated-carousel";
 import { useCallback, useState } from "react";
+import Carousel from "react-native-reanimated-carousel";
+import {
+  View,
+  Image,
+  StyleProp,
+  ViewStyle,
+  ImageStyle,
+  ImageSourcePropType,
+} from "react-native";
+
 import { CarouselDots } from "./parts/CarouselDots";
 
-export const CarouselSlider = <T extends unknown>({
-  height = 250,
-  ...props
-}: TCarouselProps<T>) => {
+interface CarouselOptions {
+  loop?: boolean;
+  width: number;
+  height?: number;
+  autoPlay?: boolean;
+  scrollAnimationDuration?: number;
+}
+
+interface Slide {
+  src?: ImageSourcePropType;
+  style?: StyleProp<ImageStyle>;
+}
+
+interface CarouselSliderProps {
+  slides: Slide[];
+  carouselProps: CarouselOptions;
+  carouselSlideStyles?: StyleProp<ViewStyle>;
+}
+
+export const CarouselSlider = ({
+  slides,
+  carouselProps,
+  carouselSlideStyles,
+}: CarouselSliderProps) => {
   const [index, setIndex] = useState(0);
 
   const handleProgressChange = useCallback(
@@ -14,26 +42,32 @@ export const CarouselSlider = <T extends unknown>({
       const roundedIndex = Math.round(absoluteProgress);
       let currentIndex = 0;
 
-      if (roundedIndex < props.data.length) {
+      if (roundedIndex < slides.length) {
         currentIndex = roundedIndex;
-      } else if (roundedIndex === props.data.length) {
+      } else if (roundedIndex === slides.length) {
         currentIndex = 0;
       }
       setIndex(currentIndex);
     },
-    [props.data.length],
+    // eslint-disable-next-line prettier/prettier
+    [slides.length]
   );
 
   return (
     <View
       style={{
-        height,
+        height: carouselProps.height,
       }}
     >
       <Carousel
-        {...props}
-        height={height}
+        data={slides}
+        renderItem={({ item }) => (
+          <View style={carouselSlideStyles}>
+            <Image source={item.src} style={item.style} />
+          </View>
+        )}
         onProgressChange={handleProgressChange}
+        {...carouselProps}
       />
       <View
         style={{
@@ -43,7 +77,7 @@ export const CarouselSlider = <T extends unknown>({
           alignItems: "center",
         }}
       >
-        <CarouselDots length={props.data.length} currentIndex={index} />
+        <CarouselDots length={slides.length} currentIndex={index} />
       </View>
     </View>
   );

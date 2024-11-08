@@ -16,6 +16,7 @@ export const CarouselDots: FC<CarouselDotsProps> = ({
     <View style={{ flexDirection: "row", gap: 16 }}>
       {dots.map((index) => (
         <View
+          key={index}
           style={{
             width: index === currentIndex ? 32 : 8,
             height: 8,
