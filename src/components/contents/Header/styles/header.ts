@@ -5,12 +5,8 @@ export const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     flexDirection: "row",
+    justifyContent: "space-between",
     padding: 16,
     backgroundColor: Theme.colors.primary,
-  },
-  text: {
-    color: Theme.colors.white,
-    fontSize: 30,
-    fontWeight: "bold",
   },
 });

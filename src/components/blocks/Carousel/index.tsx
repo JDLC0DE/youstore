@@ -1,15 +1,9 @@
+import { View } from "react-native";
 import { useCallback, useState } from "react";
-import Carousel from "react-native-reanimated-carousel";
-import {
-  View,
-  Image,
-  StyleProp,
-  ViewStyle,
-  ImageStyle,
-  ImageSourcePropType,
-} from "react-native";
+import Carousel, { CarouselRenderItem } from "react-native-reanimated-carousel";
 
 import { CarouselDots } from "./parts/CarouselDots";
+import { CustomConfig } from "react-native-reanimated-carousel/lib/typescript/types";
 
 interface CarouselOptions {
   loop?: boolean;
@@ -17,24 +11,22 @@ interface CarouselOptions {
   height?: number;
   autoPlay?: boolean;
   scrollAnimationDuration?: number;
+  customConfig?: () => CustomConfig;
 }
 
-interface Slide {
-  src?: ImageSourcePropType;
-  style?: StyleProp<ImageStyle>;
-}
-
-interface CarouselSliderProps {
-  slides: Slide[];
+interface CarouselSliderProps<T> {
+  slides: T[];
+  dotsMarginBottom?: number;
   carouselProps: CarouselOptions;
-  carouselSlideStyles?: StyleProp<ViewStyle>;
+  renderSlide: CarouselRenderItem<T>;
 }
 
-export const CarouselSlider = ({
+export const CarouselSlider = <T,>({
   slides,
+  renderSlide,
   carouselProps,
-  carouselSlideStyles,
-}: CarouselSliderProps) => {
+  dotsMarginBottom,
+}: CarouselSliderProps<T>) => {
   const [index, setIndex] = useState(0);
 
   const handleProgressChange = useCallback(
@@ -61,18 +53,14 @@ export const CarouselSlider = ({
     >
       <Carousel
         data={slides}
-        renderItem={({ item }) => (
-          <View style={carouselSlideStyles}>
-            <Image source={item.src} style={item.style} />
-          </View>
-        )}
+        renderItem={renderSlide}
         onProgressChange={handleProgressChange}
         {...carouselProps}
       />
       <View
         style={{
           height: 10,
-          marginBottom: 16,
+          marginBottom: dotsMarginBottom,
           justifyContent: "center",
           alignItems: "center",
         }}
