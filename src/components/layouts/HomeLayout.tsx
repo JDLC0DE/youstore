@@ -1,10 +1,9 @@
-import { View, Text } from "react-native";
-
+import { View } from "react-native";
 import { useCategoriesQuery } from "root/integration/generated/hooks/categories";
-import ContentCarousel from "../contents/ContentCarousel";
 import Theme from "src/styles/theme";
 import LocationSelector from "../contents/LocationSelector";
 import CategoryRecommendation from "../contents/CategoryRecommendation";
+import { HomeBanner } from "../contents/HomeBanner";
 
 {
   /* {categories.length > 0 ? (
@@ -41,7 +40,7 @@ export default function HomeLayout() {
     >
       <LocationSelector />
       <View style={{ gap: 40 }}>
-        <ContentCarousel />
+        <HomeBanner />
         <CategoryRecommendation />
       </View>
     </View>

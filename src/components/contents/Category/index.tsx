@@ -1,10 +1,15 @@
 import { View, Text } from "react-native";
 import { categoryStyles } from "./styles/category";
+import { FC } from "react";
 
-export const Category = () => {
+interface CategoryProps {
+  title: string;
+}
+
+export const Category: FC<CategoryProps> = ({ title }) => {
   return (
     <View style={categoryStyles.container}>
-      <Text>Category</Text>
+      <Text>{title}</Text>
     </View>
   );
 };

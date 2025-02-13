@@ -5,7 +5,8 @@ export const categoryStyles = StyleSheet.create({
   container: {
     borderRadius: 8,
     height: 154,
-    backgroundColor: Theme.colors.white,
+    width: 279,
+    backgroundColor: Theme.colors.primary,
     // Sombras para iOS
     shadowColor: "#212529",
     shadowOffset: { width: 4, height: 4 },

@@ -5,9 +5,11 @@ import Theme from "src/styles/theme";
 interface CarouselDotsProps {
   length: number;
   currentIndex: number;
+  color?: "light" | "dark";
 }
 
 export const CarouselDots: FC<CarouselDotsProps> = ({
+  color,
   length,
   currentIndex,
 }) => {
@@ -23,7 +25,9 @@ export const CarouselDots: FC<CarouselDotsProps> = ({
             backgroundColor:
               index === currentIndex
                 ? Theme.colors.primary
-                : Theme.colors.white,
+                : color === "dark"
+                  ? Theme.colors.grey[100]
+                  : Theme.colors.white,
             borderRadius: 4,
           }}
         />

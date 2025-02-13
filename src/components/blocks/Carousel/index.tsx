@@ -17,6 +17,7 @@ interface CarouselOptions {
 interface CarouselSliderProps<T> {
   slides: T[];
   dotsMarginBottom?: number;
+  dotsColorVariant?: "light" | "dark";
   carouselProps: CarouselOptions;
   renderSlide: CarouselRenderItem<T>;
 }
@@ -25,7 +26,8 @@ export const CarouselSlider = <T,>({
   slides,
   renderSlide,
   carouselProps,
-  dotsMarginBottom,
+  dotsMarginBottom = 0,
+  dotsColorVariant = "dark",
 }: CarouselSliderProps<T>) => {
   const [index, setIndex] = useState(0);
 
@@ -60,12 +62,18 @@ export const CarouselSlider = <T,>({
       <View
         style={{
           height: 10,
-          marginBottom: dotsMarginBottom,
           justifyContent: "center",
           alignItems: "center",
+          position: "absolute",
+          bottom: dotsMarginBottom,
+          width: "100%",
         }}
       >
-        <CarouselDots length={slides.length} currentIndex={index} />
+        <CarouselDots
+          currentIndex={index}
+          length={slides.length}
+          color={dotsColorVariant}
+        />
       </View>
     </View>
   );
