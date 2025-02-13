@@ -9,7 +9,7 @@ interface CategoryProps {
 export const Category: FC<CategoryProps> = ({ title }) => {
   return (
     <View style={categoryStyles.container}>
-      <Text>{title}</Text>
+      <Text style={categoryStyles.category}>{title}</Text>
     </View>
   );
 };

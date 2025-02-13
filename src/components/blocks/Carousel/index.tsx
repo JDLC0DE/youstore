@@ -12,6 +12,7 @@ interface CarouselOptions {
   autoPlay?: boolean;
   scrollAnimationDuration?: number;
   customConfig?: () => CustomConfig;
+  [key: string]: any;
 }
 
 interface CarouselSliderProps<T> {

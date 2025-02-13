@@ -2,7 +2,7 @@ import { View } from "react-native";
 import { useCategoriesQuery } from "root/integration/generated/hooks/categories";
 import Theme from "src/styles/theme";
 import LocationSelector from "../contents/LocationSelector";
-import CategoryRecommendation from "../contents/CategoryRecommendation";
+import { CategoryRecommendation } from "../contents/CategoryRecommendation";
 import { HomeBanner } from "../contents/HomeBanner";
 
 {

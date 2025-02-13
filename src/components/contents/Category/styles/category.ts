@@ -3,6 +3,8 @@ import { StyleSheet } from "react-native";
 
 export const categoryStyles = StyleSheet.create({
   container: {
+    justifyContent: "center",
+    alignItems: "center",
     borderRadius: 8,
     height: 154,
     width: 279,
@@ -14,5 +16,10 @@ export const categoryStyles = StyleSheet.create({
     shadowRadius: 6,
     // Sombras para Android
     elevation: 5,
+  },
+  category: {
+    fontSize: 28,
+    fontWeight: 600,
+    color: Theme.colors.white,
   },
 });
