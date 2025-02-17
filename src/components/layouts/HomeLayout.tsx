@@ -1,9 +1,10 @@
-import { View } from "react-native";
+import { View, ScrollView } from "react-native";
 import { useCategoriesQuery } from "root/integration/generated/hooks/categories";
 import Theme from "src/styles/theme";
 import LocationSelector from "../contents/LocationSelector";
 import { CategoryRecommendation } from "../contents/CategoryRecommendation";
 import { HomeBanner } from "../contents/HomeBanner";
+import { Offers } from "../contents/Offers";
 
 {
   /* {categories.length > 0 ? (
@@ -39,10 +40,11 @@ export default function HomeLayout() {
       }}
     >
       <LocationSelector />
-      <View style={{ gap: 40 }}>
+      <ScrollView style={{ gap: 40 }}>
         <HomeBanner />
         <CategoryRecommendation />
-      </View>
+        <Offers />
+      </ScrollView>
     </View>
   );
 }

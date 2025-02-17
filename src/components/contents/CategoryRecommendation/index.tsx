@@ -1,9 +1,11 @@
-import { View, Text, Dimensions } from "react-native";
+import { View, Text } from "react-native";
 import { CarouselSlider } from "src/components/blocks/Carousel";
 import { Category } from "../Category";
 import { CATEGORIES } from "root/integration/data/constants/categories";
+import { CATEGORY_WIDTH } from "../Category/styles/category";
+import { WINDOW_WIDTH } from "root/integration/data/constants/system";
 
-const width = Dimensions.get("window").width;
+const OFFSET = WINDOW_WIDTH - CATEGORY_WIDTH - 16;
 
 export const CategoryRecommendation = () => (
   <View style={{ paddingLeft: 12, rowGap: 24 }}>
@@ -15,14 +17,14 @@ export const CategoryRecommendation = () => (
       renderSlide={({ item }) => <Category title={item.name} />}
       carouselProps={{
         loop: false,
-        width: width,
+        width: WINDOW_WIDTH,
         height: 178,
         autoPlay: false,
         scrollAnimationDuration: 1000,
         mode: "parallax",
         modeConfig: {
           parallaxAdjacentItemScale: 1,
-          parallaxScrollingOffset: 135,
+          parallaxScrollingOffset: OFFSET,
           parallaxScrollingScale: 1,
         },
       }}

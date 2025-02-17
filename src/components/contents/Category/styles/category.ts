@@ -1,13 +1,15 @@
 import Theme from "src/styles/theme";
 import { StyleSheet } from "react-native";
 
+export const CATEGORY_WIDTH = 279;
+
 export const categoryStyles = StyleSheet.create({
   container: {
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 8,
     height: 154,
-    width: 279,
+    width: CATEGORY_WIDTH,
     backgroundColor: Theme.colors.primary,
     // Sombras para iOS
     shadowColor: "#212529",
@@ -17,9 +19,5 @@ export const categoryStyles = StyleSheet.create({
     // Sombras para Android
     elevation: 5,
   },
-  category: {
-    fontSize: 28,
-    fontWeight: 600,
-    color: Theme.colors.white,
-  },
+  category: { fontSize: 28, fontWeight: 600, color: Theme.colors.white },
 });
